@@ -98,6 +98,24 @@ public class DemoServer {
   }
 ```
 
+## 4 References
+
+[1]阮一峰.理解字节序[J/OL].阮一峰的网络日志,2016-11-22.
+
+[2]猿码道.聊聊Linux 五种IO模型[J/OL].简书,2016.05.18.
+
+[3]猿码道.聊聊同步、异步、阻塞与非阻塞[J/OL].简书,2016.05.18.
+
+[4]科来网络.网络通讯协议[J/OL].科来网络,2019-01.01.
+
+[5]此鱼不得水.Dubbo编码解码[J/OL].简书,2017-12-20.
+
+[6]Newland.谈谈如何使用Netty开发实现高性能的RPC服务器[J/OL].博客园,2016-06-25.
+
+[7]加多.谈谈Netty的线程模型[J/OL].并发编程网,2019-08-23.
+
+[8]鲁小憨.怎样对 RPC 进行有效的性能测试[J/OL].简书,2018-02-02.
+
 ## License
 
 EasyRpc is under the Apache 2.0 license. See the [LICENSE](https://github.com/Matrix6677/EasyRpc/blob/master/LICENSE) file for details.
