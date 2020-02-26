@@ -1,4 +1,7 @@
 # EasyRpc
+
+[![Build Status](https://github.com/Matrix6677/EasyRpc/workflows/Java%20CI/badge.svg)](https://github.com/Matrix6677/EasyRpc/actions) ![license](https://img.shields.io/github/license/alibaba/dubbo.svg)
+
 EasyRpc is a simple, high-performance, easy-to-use RPC framework based on Netty, ZooKeeper and ProtoStuff.
 
 ------
