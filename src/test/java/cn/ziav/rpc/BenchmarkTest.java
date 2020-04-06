@@ -1,5 +1,8 @@
 package cn.ziav.rpc;
 
+import static cn.ziav.rpc.Constant.topic;
+import static cn.ziav.rpc.Constant.zkAddr;
+
 import cn.ziav.rpc.bean.User;
 import cn.ziav.rpc.client.RpcClient;
 import cn.ziav.rpc.handler.MsgId;
@@ -27,16 +30,12 @@ import org.openjdk.jmh.runner.options.TimeValue;
 public class BenchmarkTest {
   public static final int CONCURRENCY = 32;
 
-  static String zkAddr = "192.168.1.156:2181";
-  static String topic = "testService";
-  static String localIp = "192.168.3.49";
-  static int port = 8812;
   private RpcClient client;
 
   private final AtomicInteger counter = new AtomicInteger(0);
 
   @Setup
-  public void initServer() throws Throwable {
+  public void initClient() throws Throwable {
     client = new RpcClient(zkAddr, topic);
   }
 

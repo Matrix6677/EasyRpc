@@ -1,9 +1,9 @@
 package cn.ziav.rpc;
 
-import static cn.ziav.rpc.BenchmarkTest.localIp;
-import static cn.ziav.rpc.BenchmarkTest.port;
-import static cn.ziav.rpc.BenchmarkTest.topic;
-import static cn.ziav.rpc.BenchmarkTest.zkAddr;
+import static cn.ziav.rpc.Constant.localIp;
+import static cn.ziav.rpc.Constant.port;
+import static cn.ziav.rpc.Constant.topic;
+import static cn.ziav.rpc.Constant.zkAddr;
 
 import cn.ziav.rpc.handler.CreateUserMsgHandler;
 import cn.ziav.rpc.handler.ExistUserMsgHandler;

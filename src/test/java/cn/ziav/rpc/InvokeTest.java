@@ -1,5 +1,9 @@
 package cn.ziav.rpc;
 
+import static cn.ziav.rpc.Constant.localIp;
+import static cn.ziav.rpc.Constant.port;
+import static cn.ziav.rpc.Constant.topic;
+import static cn.ziav.rpc.Constant.zkAddr;
 import static cn.ziav.rpc.exception.ExceptionCode.TIME_OUT;
 
 import cn.ziav.rpc.bean.HelloReq;
@@ -18,11 +22,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class InvokeTest {
-  static String zkAddr = "192.168.1.156:2181";
-  static String topic = "testService";
-  static String localIp = "192.168.3.49";
-  static int port = 8812;
+public class InvokeTest {
 
   @BeforeAll
   static void initServer() throws Throwable {
