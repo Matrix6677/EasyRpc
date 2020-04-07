@@ -10,9 +10,15 @@ import cn.ziav.rpc.handler.ExistUserMsgHandler;
 import cn.ziav.rpc.handler.GetUserMsgHandler;
 import cn.ziav.rpc.handler.ListUserMsgHandler;
 import cn.ziav.rpc.server.RpcServer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/** @author Zavi */
+/**
+ * @author Zavi
+ */
 public class DemoServer {
+
+  static Logger logger = LoggerFactory.getLogger(DemoServer.class);
 
   public static void main(String[] args) throws Throwable {
     RpcServer server = new RpcServer(zkAddr, topic, localIp, port);
@@ -20,6 +26,6 @@ public class DemoServer {
     server.register(new GetUserMsgHandler());
     server.register(new ListUserMsgHandler());
     server.register(new CreateUserMsgHandler());
-    System.err.println("服务器启动成功！");
+    logger.info("服务器启动成功！");
   }
 }
