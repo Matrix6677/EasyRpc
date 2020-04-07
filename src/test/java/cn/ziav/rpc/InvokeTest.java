@@ -72,7 +72,7 @@ public class InvokeTest {
     RemotingException remotingException =
         Assertions.assertThrows(
             RemotingException.class,
-            () -> client.send(client.randomNode(), MsgId.TIMEOUT, "ping", 50));
+            () -> client.send(client.randomNode(), MsgId.TIMEOUT, "ping", 1));
     Assertions.assertEquals(TIME_OUT, remotingException.code);
   }
 
@@ -119,5 +119,12 @@ public class InvokeTest {
           .start();
     }
     latch.await();
+  }
+
+  @Test
+  public void testDiscovery() throws Throwable {
+    RpcClient client = new RpcClient(zkAddr, topic);
+    String node = client.randomNode();
+    Assertions.assertEquals("127.0.0.1:8812", node);
   }
 }

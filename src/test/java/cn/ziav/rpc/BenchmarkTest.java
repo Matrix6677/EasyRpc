@@ -95,9 +95,9 @@ public class BenchmarkTest {
         new OptionsBuilder()
             .timeUnit(TimeUnit.MILLISECONDS)
             .include(BenchmarkTest.class.getSimpleName())
-            .warmupIterations(5) //
+            .warmupIterations(3) //
             .warmupTime(TimeValue.seconds(3)) //
-            .measurementIterations(10) //
+            .measurementIterations(5) //
             .measurementTime(TimeValue.seconds(5)) //
             .threads(CONCURRENCY)
             .forks(1)
