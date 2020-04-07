@@ -113,7 +113,7 @@ public class RpcDispatcher extends ChannelDuplexHandler {
 
   @Override
   public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-    super.exceptionCaught(ctx, cause);
+    logger.error("", cause);
   }
 
   public Map<String, Channel> getChannels() {
