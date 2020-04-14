@@ -28,7 +28,7 @@ EasyRpc is a simple, high-performance, easy-to-use RPC framework based on Netty,
 
 ### 2.3 Main Flow
 
-![主流程](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/%E4%B8%BB%E6%B5%81%E7%A8%8B.png)
+<img src="https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/%E4%B8%BB%E6%B5%81%E7%A8%8B.png" alt="主流程" style="zoom:67%;" />
 
 ### 2.4 Packet structure
 
