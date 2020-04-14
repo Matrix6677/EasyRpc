@@ -6,19 +6,9 @@ EasyRpc is a simple, high-performance, easy-to-use RPC framework based on Netty,
 
 ------
 
-## 1 Architecture
+## 1 Features
 
-### 1.1 System timing
-
-![系统时序](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/系统时序.png)
-
-### 1.2 Packet structure
-
-![数据包结构](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/数据包结构.png)
-
-## 2 Features
-
-- Easy to use
+- Easy and simple to use
 - Low latency based on Netty 4
 - Non-blocking asynchronous/synchronous call support
 - Service registration and discovery based on ZooKeeper
@@ -26,9 +16,33 @@ EasyRpc is a simple, high-performance, easy-to-use RPC framework based on Netty,
 - 4 load balancing strategies support: random, round, hash, lowest latency
 - Timeout or Exception handling
 
-## 3 Getting started
+## 2 Overall Design
 
-### 3.1 Implement IMsgHandler interface for the provider
+### 2.1 Architecture
+
+![系统架构](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.png)
+
+### 2.2 System Timing
+
+![系统时序](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/系统时序.png)
+
+### 2.3 Main Flow
+
+![主流程](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/%E4%B8%BB%E6%B5%81%E7%A8%8B.png)
+
+### 2.4 Packet structure
+
+![数据包结构](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/数据包结构.png)
+
+## 3 Performance Test
+
+![吞吐量](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/%E5%90%9E%E5%90%90%E9%87%8F.png)
+
+![平均耗时&随机取样](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/%E5%B9%B3%E5%9D%87%E8%80%97%E6%97%B6%26%E9%9A%8F%E6%9C%BA%E5%8F%96%E6%A0%B7.png)
+
+## 4 Getting started
+
+### 4.1 Implement IMsgHandler interface for the provider
 
 ```java
 public class HelloMsgHandler implements IMsgHandler<HelloReq, HelloResp> {
@@ -47,7 +61,7 @@ public class HelloMsgHandler implements IMsgHandler<HelloReq, HelloResp> {
 }
 ```
 
-### 3.2 Start service provider
+### 4.2 Start service provider
 
 ```java
 public class DemoServer {
@@ -60,9 +74,9 @@ public class DemoServer {
 }
 ```
 
-### 3.3 Call remote service in consumer
+### 4.3 Call remote service in consumer
 
-#### 3.3.1 Sync
+#### 4.3.1 Sync
 
 ```java
   void testSync() throws Throwable {
@@ -74,7 +88,7 @@ public class DemoServer {
   }
 ```
 
-#### 3.3.2 Async
+#### 4.3.2 Async
 
 ```java
   void testAsync() throws Throwable {
@@ -119,6 +133,6 @@ public class DemoServer {
 
 [8]鲁小憨.怎样对 RPC 进行有效的性能测试[J/OL].简书,2018-02-02.
 
-## License
+## 5 License
 
 EasyRpc is under the Apache 2.0 license. See the [LICENSE](https://github.com/Matrix6677/EasyRpc/blob/master/LICENSE) file for details.
