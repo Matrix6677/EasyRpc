@@ -2,120 +2,47 @@
 
 [![Build Status](https://github.com/Matrix6677/EasyRpc/workflows/Java%20CI/badge.svg)](https://github.com/Matrix6677/EasyRpc/actions) ![license](https://img.shields.io/github/license/alibaba/dubbo.svg)
 
-EasyRpc is a simple, high-performance, easy-to-use RPC framework based on Netty, ZooKeeper and ProtoStuff.
+EasyRpc是基于Netty、ZooKeeper和ProtoStuff开发的一个简单易用，便于学习的RPC框架。
 
 ------
 
-## 1 Features
+## 1 特性
 
-- Easy and simple to use
-- Low latency based on Netty 4
-- Non-blocking asynchronous/synchronous call support
-- Service registration and discovery based on ZooKeeper
-- Fast serialization and deserialization based on Protostuff
-- 4 load balancing strategies support: random, round, hash, lowest latency
-- Timeout or Exception handling
+- 简单易用；
+- 协议头仅20字节；
+- 低延迟，基于Netty 4；
+- 支持非阻塞的同步/异步调用；
+- 基于ProtoStuff的对象序列化；
+- 基于ZooKeeper实现的服务注册和发现；
+- 支持4种负载均衡策略：随机、轮询、哈希、最佳响应；
+- 完整的单元测试和JMH性能压测；
+- 注释完善，方便学习。
 
-## 2 Overall Design
+## 2 总体设计
 
-### 2.1 Architecture
+### 2.1 架构图
 
-![系统架构](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.png)
+![系统架构](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/doc/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.png)
 
-### 2.2 System Timing
+### 2.2 系统时许
 
-![系统时序](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/系统时序.png)
+![系统时序](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/doc/%E7%B3%BB%E7%BB%9F%E6%97%B6%E5%BA%8F.png)
 
-### 2.3 Main Flow
+### 2.3 主流程图
 
-<img src="https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/%E4%B8%BB%E6%B5%81%E7%A8%8B.png" alt="主流程" style="zoom:67%;" />
+<img src="https://github.com/Matrix6677/EasyRpc/blob/master/doc/%E4%B8%BB%E6%B5%81%E7%A8%8B.png?raw=true" alt="主流程" style="zoom:67%;" />
 
-### 2.4 Packet structure
+### 2.4 数据包结构
 
-![数据包结构](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/数据包结构.png)
+![数据包结构](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/doc/%E6%95%B0%E6%8D%AE%E5%8C%85%E7%BB%93%E6%9E%84.png)
 
-## 3 Performance Test
+## 3 性能测试
 
-![吞吐量](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/%E5%90%9E%E5%90%90%E9%87%8F.png)
+![吞吐量](https://github.com/Matrix6677/EasyRpc/blob/master/doc/%E5%90%9E%E5%90%90%E9%87%8F.png?raw=true)
 
-![平均耗时&随机取样](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/%E5%B9%B3%E5%9D%87%E8%80%97%E6%97%B6%26%E9%9A%8F%E6%9C%BA%E5%8F%96%E6%A0%B7.png)
+![平均耗时&随机取样](https://github.com/Matrix6677/EasyRpc/blob/master/doc/%E5%B9%B3%E5%9D%87%E8%80%97%E6%97%B6&%E9%9A%8F%E6%9C%BA%E5%8F%96%E6%A0%B7.png?raw=true)
 
-## 4 Getting started
-
-### 4.1 Implement IMsgHandler interface for the provider
-
-```java
-public class HelloMsgHandler implements IMsgHandler<HelloReq, HelloResp> {
-
-  @Override
-  public HelloResp process(HelloReq helloReq) throws InterruptedException {
-    HelloResp helloResp = new HelloResp();
-    helloResp.msg = "pong";
-    return helloResp;
-  }
-
-  @Override
-  public int msgId() {
-    return MsgId.HELLO;
-  }
-}
-```
-
-### 4.2 Start service provider
-
-```java
-public class DemoServer {
-
-  public static void main(String[] args) throws Throwable {
-    RpcServer server = new RpcServer(zkAddr, topic, localIp, port);
-    server.register(new HelloMsgHandler());
-    System.err.println("服务器启动成功！");
-  }
-}
-```
-
-### 4.3 Call remote service in consumer
-
-#### 4.3.1 Sync
-
-```java
-  void testSync() throws Throwable {
-    RpcClient client = new RpcClient(zkAddr, topic);
-    HelloReq helloReq = new HelloReq();
-    helloReq.msg = "ping";
-    HelloResp resp = client.send(client.randomNode(), MsgId.HELLO, helloReq, 3000);
-    Assertions.assertEquals(resp.msg, "pong");
-  }
-```
-
-#### 4.3.2 Async
-
-```java
-  void testAsync() throws Throwable {
-    RpcClient client = new RpcClient(zkAddr, topic);
-    HelloReq helloReq = new HelloReq();
-    helloReq.msg = "ping";
-    CountDownLatch latch = new CountDownLatch(1);
-    client.sendAsync(
-        client.randomNode(),
-        MsgId.HELLO,
-        helloReq,
-        3000,
-        new EasyRpcCallback<HelloResp>() {
-          @Override
-          public void success(HelloResp result) {
-            Assertions.assertEquals(result.msg, "pong");
-            latch.countDown();
-          }
-
-          @Override
-          public void fail(Throwable throwable) {}
-        });
-    latch.await();
-  }
-```
-
-## 4 References
+## 4 参考文献
 
 [1]阮一峰.理解字节序[J/OL].阮一峰的网络日志,2016-11-22.
 
