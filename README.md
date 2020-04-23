@@ -9,8 +9,9 @@ EasyRpc是基于Netty、ZooKeeper和ProtoStuff开发的一个简单易用，便�
 ## 1 特性
 
 - 简单易用；
-- 协议头仅20字节；
 - 低延迟，基于Netty 4；
+- 解决TCP粘包/拆包问题；
+- 仿Dubbo，协议头仅20字节；
 - 支持非阻塞的同步/异步调用；
 - 基于ProtoStuff的对象序列化；
 - 基于ZooKeeper实现的服务注册和发现；
