@@ -24,7 +24,7 @@ EasyRpc是基于Netty、ZooKeeper和ProtoStuff开发的一个简单易用，便�
 
 ![系统架构](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/doc/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84.png)
 
-### 2.2 系统时许
+### 2.2 系统时序
 
 ![系统时序](https://raw.githubusercontent.com/Matrix6677/EasyRpc/master/doc/%E7%B3%BB%E7%BB%9F%E6%97%B6%E5%BA%8F.png)
 
