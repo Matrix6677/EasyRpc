@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>cn.ziav</groupId>
   <artifactId>easy-rpc</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0-RELEASE</version>
   <name>easy-rpc</name>
   <description>a simple rpc framework based on netty 4.</description>
 
